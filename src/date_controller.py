@@ -17,6 +17,7 @@ class DateController:
             formated_date = dateutil.parser.parse(date, dayfirst=True)
 
         except dateutil.parser._parser.ParserError:
+            print(dateutil.parser._parser.ParserError())
             return None
 
         return formated_date.strftime("%d %b %Y")
