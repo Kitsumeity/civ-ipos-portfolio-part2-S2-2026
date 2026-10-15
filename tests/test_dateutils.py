@@ -52,7 +52,7 @@ class TestDateController(unittest.TestCase):
         result = DateController.format_date(date)
         self.assertEqual(expected, result)
 
-    def test_reformat_date9(self):
+    def test_reformat_date_9(self):
         date = "10 12 2004"
         expected = "10 Dec 2004"
         result = DateController.format_date(date)
