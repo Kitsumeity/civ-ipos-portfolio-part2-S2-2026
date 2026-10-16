@@ -33,8 +33,14 @@ class DateController:
         Returns:
             Date: The date given formated to day month year
         """
-        converted_date = dateutil.parser.parse(date_string, dayfirst=True)
-        return converted_date.date()
+        try:
+            converted_date = dateutil.parser.parse(date_string, dayfirst=True)
+            return converted_date.date()
+
+        except dateutil.parser._parser.ParserError:
+            print("Failed to format date")
+            return None
+
 
     @staticmethod
     def before_today(date_string, today_date = dateutil.utils.today()):
