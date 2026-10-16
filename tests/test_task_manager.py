@@ -1,5 +1,6 @@
+import datetime
 import unittest
-from src.task_manager import add_task, delete_task, filter_tasks_by_status
+from src.task_manager import add_task, delete_task, filter_tasks_by_status, check_if_overdue
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
 import os
@@ -94,6 +95,16 @@ class TestTaskManager(unittest.TestCase):
         loaded_tasks = load_tasks()
         self.assertEqual(len(loaded_tasks), 1)
         self.assertEqual(loaded_tasks[0].title, "Persistent Task")
+
+    def test_overdue_tasks(self):
+        today_date = datetime.date(2024, 12,25)
+        add_task(self.tasks, "OverdueTask", "Description", "01-12-2024")
+        add_task(self.tasks, "Task", "Description", "30-12-2024")
+        overdue_tasks = check_if_overdue(self.tasks, today_date=today_date)
+        self.assertEqual(len(overdue_tasks), 1)
+        self.assertEqual(overdue_tasks[0].status, "overdue")
+        self.assertEqual(self.tasks[0].status, "overdue")
+
 
 
 if __name__ == "__main__":
