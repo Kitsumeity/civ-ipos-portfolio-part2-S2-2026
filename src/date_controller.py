@@ -1,5 +1,6 @@
 import dateutil
 
+
 def format_date(date):
     """
     Format a date string to be standardised
@@ -36,8 +37,7 @@ def parse(date_string):
         return None
 
 
-
-def before_today(date_string, today_date = dateutil.utils.today()):
+def before_today(date_string, today_date=None):
     """
     Compares a given date to today
 
@@ -48,11 +48,13 @@ def before_today(date_string, today_date = dateutil.utils.today()):
     Returns:
         Bool: True or False
     """
+    if today_date is None:
+        today_date = dateutil.utils.today()
     today_int = int(today_date.strftime("%Y%m%d"))
     date = parse(date_string)
     if date is None:
         return None
-    else :
+    else:
         date_int = int(date.strftime("%Y%m%d"))
 
     if date_int < today_int:
