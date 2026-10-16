@@ -57,7 +57,7 @@ class TestTaskManager(unittest.TestCase):
         Test adding a task with an invalid due date format.
         Verify that the function handles invalid input gracefully and returns False.
         """
-        result = add_task(self.tasks, "Test Task", "Description", "2024-12-01")
+        result = add_task(self.tasks, "Test Task", "Description", "2024-13-16")
         self.assertFalse(result)
 
     def test_delete_task(self):
