@@ -21,3 +21,17 @@ class DateController:
             return None
 
         return formated_date.strftime("%d %b %Y")
+
+    @staticmethod
+    def parse(date_string):
+        """
+        Format a string to be a date
+
+        Args:
+            date_string (string): A string that is a date
+
+        Returns:
+            Date: The date given formated to day month year
+        """
+        converted_date = dateutil.parser.parse(date_string, dayfirst=True)
+        return converted_date.date()
