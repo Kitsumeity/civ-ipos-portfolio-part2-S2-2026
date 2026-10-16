@@ -93,7 +93,7 @@ class TestDateController(unittest.TestCase):
         date = "16 1d 2026"
         today = datetime.date(2004, 10, 12)
         result = DateController.before_today(date, today_date=today)
-        self.assertFalse(result)
+        self.assertIsNone(result)
 
 
 if __name__ == "__main__":
