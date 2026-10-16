@@ -35,3 +35,23 @@ class DateController:
         """
         converted_date = dateutil.parser.parse(date_string, dayfirst=True)
         return converted_date.date()
+
+    @staticmethod
+    def before_today(date_string, today_date = dateutil.utils.today()):
+        """
+        Compares a given date to today
+
+        Args:
+            date_string (string): A string that is a date
+            today_date (Datetime): Date that would be considered today
+
+        Returns:
+            Bool: True or False
+        """
+        today = int(today_date.strftime("%Y%m%d"))
+        date_to_compare = int(DateController.parse(date_string).strftime("%Y%m%d"))
+
+        if date_to_compare < today:
+            return True
+        else:
+            return False
