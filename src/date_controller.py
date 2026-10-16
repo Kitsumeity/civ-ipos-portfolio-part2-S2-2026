@@ -14,10 +14,10 @@ class DateController:
             String: The date given formated to day month year
         """
         try:
-            formated_date = dateutil.parser.parse(date, dayfirst=True)
+            formated_date = DateController.parse(date)
 
         except dateutil.parser._parser.ParserError:
-            print(dateutil.parser._parser.ParserError())
+            print("Failed to format date")
             return None
 
         return formated_date.strftime("%d %b %Y")
