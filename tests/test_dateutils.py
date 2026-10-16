@@ -77,6 +77,24 @@ class TestDateController(unittest.TestCase):
         result = DateController.format_date(date)
         self.assertIsNone(result)
 
+    def test_before_today(self):
+        date = "24 7 2001"
+        today = datetime.date(2004, 10, 12)
+        result = DateController.before_today(date, today_date=today)
+        self.assertTrue(result)
+
+    def test_after_today(self):
+        date = "16 10 2026"
+        today = datetime.date(2004, 10, 12)
+        result = DateController.before_today(date, today_date=today)
+        self.assertFalse(result)
+
+    def test_before_today_invalid(self):
+        date = "16 1d 2026"
+        today = datetime.date(2004, 10, 12)
+        result = DateController.before_today(date, today_date=today)
+        self.assertFalse(result)
+
 
 if __name__ == "__main__":
     unittest.main()
