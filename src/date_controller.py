@@ -51,10 +51,14 @@ class DateController:
         Returns:
             Bool: True or False
         """
-        today = int(today_date.strftime("%Y%m%d"))
-        date_to_compare = int(DateController.parse(date_string).strftime("%Y%m%d"))
+        today_int = int(today_date.strftime("%Y%m%d"))
+        date = DateController.parse(date_string)
+        if date is None:
+            return None
+        else :
+            date_int = int(date.strftime("%Y%m%d"))
 
-        if date_to_compare < today:
+        if date_int < today_int:
             return True
         else:
             return False
