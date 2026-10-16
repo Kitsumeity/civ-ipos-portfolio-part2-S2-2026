@@ -59,11 +59,23 @@ class TestDateController(unittest.TestCase):
         result = DateController.parse(date)
         self.assertEqual(expected, result)
 
+
+
     def test_invalid_parse_date(self):
         date = "654 18 2004"
         result = DateController.parse(date)
         self.assertIsNone(result)
 
+    def test_reformat_date(self):
+        date = "12 10 2004"
+        expected = "12 Oct 2004"
+        result = DateController.format_date(date)
+        self.assertEqual(expected, result)
+
+    def test_invalid_reformat_date(self):
+        date = "654 18 2004"
+        result = DateController.format_date(date)
+        self.assertIsNone(result)
 
 
 if __name__ == "__main__":
