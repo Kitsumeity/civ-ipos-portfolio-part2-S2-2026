@@ -13,11 +13,8 @@ class DateController:
         Returns:
             String: The date given formated to day month year
         """
-        try:
-            formated_date = DateController.parse(date)
-
-        except dateutil.parser._parser.ParserError:
-            print("Failed to format date")
+        formated_date = DateController.parse(date)
+        if formated_date is None:
             return None
 
         return formated_date.strftime("%d %b %Y")
