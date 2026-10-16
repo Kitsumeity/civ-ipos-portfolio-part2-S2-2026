@@ -1,6 +1,5 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
 import date_controller
 
 
@@ -131,7 +130,7 @@ def check_if_overdue(tasks, today_date=None):
     pending_tasks = filter_tasks_by_status(tasks, "pending")
     overdue_tasks = []
     for task in pending_tasks:
-        if date_controller.before_today(task.due_date,today_date=today_date):
+        if date_controller.before_today(task.due_date, today_date=today_date):
             task.status = "overdue"
             overdue_tasks.append(task)
     return overdue_tasks
