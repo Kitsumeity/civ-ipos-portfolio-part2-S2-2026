@@ -39,6 +39,21 @@ class Task:
             "status": self.status
         }
 
+    def to_list(self):
+        """
+        Convert the Task object into a list representation.
+
+        Returns:
+            list: A list containing the task details in the format of:
+                  'title', 'description', 'due_date', and 'status'.
+        """
+        return [
+            self.title,
+            self.description,
+            self.due_date,
+            self.status
+        ]
+
     @staticmethod
     def from_dict(task_data):
         """
