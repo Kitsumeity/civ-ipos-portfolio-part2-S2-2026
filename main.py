@@ -24,6 +24,7 @@ def main():
             else:
                 print("Task not found.")
         elif choice == "3":
+            print("")
             list_tasks(tasks)
         elif choice == "4":
             print("Exiting Task Manager.")
