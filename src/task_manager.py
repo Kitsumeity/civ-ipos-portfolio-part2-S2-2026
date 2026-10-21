@@ -91,7 +91,8 @@ def list_tasks(tasks, status=None):
     if not filtered:
         print("No tasks found.")
         return
-    print(tabulate(filtered))
+    headers = ["Title","Description", "Due Date", "Status"]
+    print(tabulate(filtered, headers=headers))
 
 
 def filter_tasks_by_status(tasks, status):
