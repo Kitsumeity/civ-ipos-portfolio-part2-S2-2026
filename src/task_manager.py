@@ -1,7 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
 import src.date_controller as date_controller
-from datetime import datetime
 from tabulate import tabulate
 
 
