@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
+import src.date_controller as date_controller
 from tabulate import tabulate
 
 
@@ -29,13 +29,12 @@ def add_task(tasks, title, description, due_date):
         return False
 
     # Validate due date format
-    try:
-        datetime.strptime(due_date, "%d-%m-%Y")
-    except ValueError:
+    formated_date = date_controller.format_date(due_date)
+    if formated_date is None:
         print("Error: Invalid date format. Use DD-MM-YYYY.")
         return False
 
-    tasks.append(Task(title, description, due_date))
+    tasks.append(Task(title, description, formated_date))
     save_tasks(tasks)
     return True
 
@@ -62,7 +61,7 @@ def delete_task(tasks, title):
     return False
 
 
-def list_tasks(tasks, status=None):
+def list_tasks(tasks, status=None, check_overdue=True):
     """
     Display tasks in the task list, optionally filtered by status.
 
@@ -70,6 +69,7 @@ def list_tasks(tasks, status=None):
         tasks (list): The list of existing Task objects.
         status (str, optional): The status to filter tasks
         by (e.g., "pending" or "completed").
+        check_overdue (bool, optional): Check if the tasks are overdue
 
     Returns:
         None
@@ -77,6 +77,9 @@ def list_tasks(tasks, status=None):
     Side Effects:
         - Prints the list of tasks to the console.
     """
+    if check_overdue:
+        check_if_overdue(tasks)
+
     filtered = []
     if not status:
         # If status is not set
@@ -107,3 +110,26 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+
+def check_if_overdue(tasks, today_date=None):
+    """
+    Checks to see if a pending task is overdue and marks them as overdue
+
+    Args:
+        tasks (list): The list of existing Task objects.
+        today_date (datetime): Date that would be considered today
+
+    Returns:
+        list: A list of Task objects that got set to overdue.
+
+    Side Effects:
+        Sets the task's status to overdue
+    """
+    pending_tasks = filter_tasks_by_status(tasks, "pending")
+    overdue_tasks = []
+    for task in pending_tasks:
+        if date_controller.before_today(task.due_date, today_date=today_date):
+            task.status = "overdue"
+            overdue_tasks.append(task)
+    return overdue_tasks
