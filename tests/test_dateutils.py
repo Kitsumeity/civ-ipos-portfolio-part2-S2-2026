@@ -1,5 +1,5 @@
 import unittest
-from src.date_controller import *
+from src.date_controller import before_today, parse, format_date
 import datetime
 
 
@@ -58,8 +58,6 @@ class TestDateController(unittest.TestCase):
         expected = datetime.date(2004, 12, 10)
         result = parse(date)
         self.assertEqual(expected, result)
-
-
 
     def test_invalid_parse_date(self):
         date = "654 18 2004"
