@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-import date_controller
+import src.date_controller as date_controller
 
 
 def add_task(tasks, title, description, due_date):
